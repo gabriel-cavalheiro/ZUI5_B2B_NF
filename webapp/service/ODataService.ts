@@ -90,7 +90,7 @@ export class ODataService {
                 return;
             }
 
-            this.oODataModel.create("/ProcessarNotasSet", oPayload, {
+            this.oODataModel.create("/EnviarNFSet", oPayload, {
                 success: (oData: any ) => {
                     console.log("Sucesso na requisição:", oData);
                     try {
