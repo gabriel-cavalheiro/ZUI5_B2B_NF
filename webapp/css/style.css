@@ -42,6 +42,7 @@ html, body {
 }
 
 .customCard:hover {
+    cursor: pointer;
     transform: translateY(-5px);
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15);
 }
@@ -56,7 +57,7 @@ html, body {
 
 /* Títulos - Tema Light */
 .customCard .sapMTitle {
-    color: #64b5f6;
+    color: #0064D9;
     font-weight: bold;
 }
 
@@ -66,7 +67,7 @@ html, body {
 
 /* Ícones - Tema Light */
 .customCard .sapUiIcon {
-    color: #64b5f6;
+    color: #0064D9;
 }
 
 /* ============================================
@@ -99,9 +100,7 @@ html, body {
 }
 
 .sapMInputBase {
-    background-color: #1a1a1a;
     color: #e0e0e0;
-    border: 1px solid #444444;
 }
 
 /* ============================================
