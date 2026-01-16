@@ -1,0 +1,7 @@
+<mvc:View controllerName="br.com.inbetta.zui5b2bnf.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="idMainPage" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View>
