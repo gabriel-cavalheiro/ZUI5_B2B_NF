@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        title="Selecione a Filial"
+        class="sapUiPopupWithPadding"
+        items="{help>/filiais}"
+        search=".onValueHelpSearchBranch"
+        confirm=".onValueHelpCloseBranch"
+        cancel=".onValueHelpCloseBranch"
+        multiSelect="true">
+        <StandardListItem
+            title="{help>key}"
+            description="{help>text}" />
+    </SelectDialog>
+</core:FragmentDefinition>

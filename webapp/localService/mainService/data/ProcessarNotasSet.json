@@ -1,0 +1,17 @@
+{
+  "results": [
+    {
+      "ProcessarNotasId": "001",
+      "Status": "Sucesso",
+      "Mensagem": "Processamento concluído com sucesso!",
+      "QuantidadeProcessada": "150",
+      "DataProcessamento": "2025-01-15 14:30:45",
+      "Branch": "0001",
+      "NfNumero": "12345",
+      "DataInicio": "20250101000000",
+      "DataFim": "20250115000000",
+      "CargaInicial": "false",
+      "CargaIncremental": "true"
+    }
+  ]
+}

@@ -1,7 +1,193 @@
-<mvc:View controllerName="br.com.inbetta.zui5b2bnf.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="idMainPage" title="{i18n>title}">
-        <content />
+<mvc:View
+    controllerName="br.com.inbetta.zui5b2bnf.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core">
+
+    <!-- Page com altura 100% para ocupar toda a tela -->
+    <Page 
+        title="{i18n>appTitle}" 
+        class="fullWidthPage"
+        enableScrolling="true"
+        showNavButton="false">
+        
+        <content>
+            <!-- VBox principal-->
+            <VBox class="fullWidthContainer">
+                
+                <!-- Painel de Filtros -->
+                <Panel 
+                    backgroundDesign="Transparent" 
+                    class="sapUiNoContentPadding"
+                    expandable="true"
+                    expanded="true">
+                    
+                    <VariantManagement
+                        id="vmFiltros"
+                        class="sapUiSmallMarginBottom"
+                        showShare="false"
+                        showExecuteOnSelection="false"
+                        showSetAsDefault="true"
+                        select=".onVariantSelect"
+                        save=".onVariantSave"
+                        manage=".onVariantManage"
+                        items="{variants>/items}">
+                        <VariantItem
+                            key="{variants>key}"
+                            text="{variants>name}" />
+                    </VariantManagement>
+
+                    <f:SimpleForm
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        title="{i18n>secFiltros}"
+                        labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                        columnsXL="2" columnsL="2" columnsM="1">
+                        
+                        <f:content>
+                            <!-- Período -->
+                            <Label text="{i18n>lblPeriodo}" required="true" />
+                            <DateRangeSelection
+                                id="drsPeriodo"
+                                dateValue="{view>/filtros/dataInicio}"
+                                secondDateValue="{view>/filtros/dataFim}"
+                                displayFormat="dd/MM/yyyy" />
+
+                            <!-- Filial -->
+                            <Label text="{i18n>lblFilial}" />
+                            <MultiInput
+                                id="multiInputBranch"
+                                placeholder="Digite ou selecione filiais"
+                                valueHelpRequest=".onValueHelpRequestBranch"
+                                valueHelpOnly="false"
+                                enableMultilineMode="false"
+                                showValueHelp="true"
+                                tokens="{view>/filtros/filiais}">
+                                <tokens>
+                                    <Token key="{view>key}" text="{view>text}" />
+                                </tokens>
+                            </MultiInput>
+
+                            <!-- Carga Inicial -->
+                            <Label text="{i18n>lblCargaInicial}" />
+                            <Switch 
+                                id="swCargaInicial" 
+                                state="{view>/filtros/cargaInicial}" 
+                                customTextOn="Sim" 
+                                customTextOff="Não" />
+                        </f:content>
+                    </f:SimpleForm>
+                </Panel>
+
+                <!-- Painel de Resultados -->
+                <Panel 
+                    id="panelResultado" 
+                    visible="{view>/resultadoVisivel}" 
+                    expandable="true" 
+                    expanded="true" 
+                    width="auto" 
+                    height="auto">
+                    
+                    <headerToolbar>
+                        <Toolbar height="3rem">
+                            <Title text="{i18n>secResultado}" />
+                            <ToolbarSpacer />
+                            <Button 
+                                icon="sap-icon://excel-attachment" 
+                                text="{i18n>btnExportar}" 
+                                press=".onExportarResultado" />
+                        </Toolbar>
+                    </headerToolbar>
+                    
+                    <content>
+                        <!-- Grid com 4 cards responsivos -->
+                        <l:Grid 
+                            defaultSpan="XL3 L3 M6 S12" 
+                            class="sapUiSmallMarginTop">
+                            
+                            <!-- Card de Status -->
+                            <VBox class="sapUiSmallMargin customCard">
+                                <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                                    <core:Icon 
+                                        src="sap-icon://task" 
+                                        size="1.5rem" 
+                                        class="sapUiTinyMarginEnd cardIcon" />
+                                    <Title text="{i18n>lblStatus}" />
+                                </HBox>
+                                <ObjectStatus
+                                    class="sapMFontLarge"
+                                    text="{view>/resultado/Status}"
+                                    state="{= ${view>/resultado/Status} === 'Sucesso' ? 'Success' : (${view>/resultado/Status} === 'Error' ? 'Error' : 'Warning') }" />
+                            </VBox>
+
+                            <!-- Card de Registros Processados -->
+                            <VBox class="sapUiSmallMargin customCard">
+                                <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                                    <core:Icon 
+                                        src="sap-icon://number-sign" 
+                                        size="1.5rem" 
+                                        class="sapUiTinyMarginEnd cardIcon" />
+                                    <Title text="{i18n>lblQuantidade}" />
+                                </HBox>
+                                <Text 
+                                    text="{view>/resultado/QuantidadeProcessada}" 
+                                    class="sapMFontLarge" />
+                            </VBox>
+
+                            <!-- Card de Data/Hora -->
+                            <VBox class="sapUiSmallMargin customCard">
+                                <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                                    <core:Icon 
+                                        src="sap-icon://appointment-2" 
+                                        size="1.5rem" 
+                                        class="sapUiTinyMarginEnd cardIcon" />
+                                    <Title text="{i18n>lblDataHora}" />
+                                </HBox>
+                                <Text 
+                                    text="{view>/resultado/DataProcessamento}" 
+                                    class="sapMFontLarge" />
+                            </VBox>
+
+                            <!-- Card de Mensagem -->
+                            <VBox class="sapUiSmallMargin customCard">
+                                <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                                    <core:Icon 
+                                        src="sap-icon://message-information" 
+                                        size="1.5rem" 
+                                        class="sapUiTinyMarginEnd cardIcon" />
+                                    <Title text="{i18n>lblMensagem}" />
+                                </HBox>
+                                <Text 
+                                    text="{view>/resultado/Mensagem}" 
+                                    class="sapMFontLarge" />
+                            </VBox>
+                        </l:Grid>
+                    </content>
+                </Panel>
+            </VBox>
+        </content>
+        
+        <!-- Footer com botões  -->
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button 
+                    id="btnProcessar"
+                    class="sapMBtn"
+                    text="{i18n>btnProcessar}" 
+                    type="Accept" 
+                    press=".onProcessar" 
+                    icon="sap-icon://process"/>
+                <Button 
+                    id="btnLimpar"
+                    text="{i18n>btnLimpar}" 
+                    press=".onLimpar" 
+                    icon="sap-icon://clear-filter"/>
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>

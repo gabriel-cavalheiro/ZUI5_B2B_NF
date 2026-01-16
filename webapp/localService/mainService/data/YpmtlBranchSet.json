@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "Branch": "0001",
+      "Bukrs": "1000",
+      "Name": "Filial São Paulo"
+    },
+    {
+      "Branch": "0002",
+      "Bukrs": "1000",
+      "Name": "Filial Rio de Janeiro"
+    },
+    {
+      "Branch": "0003",
+      "Bukrs": "1000",
+      "Name": "Filial Belo Horizonte"
+    },
+    {
+      "Branch": "0004",
+      "Bukrs": "1000",
+      "Name": "Filial Salvador"
+    },
+    {
+      "Branch": "0005",
+      "Bukrs": "1000",
+      "Name": "Filial Brasília"
+    }
+  ]
+}
