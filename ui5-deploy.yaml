@@ -5,6 +5,7 @@ metadata:
   name: br.com.inbetta.zui5b2bnf
 type: application
 builder:
+  buildTarget: dist/resources
   customTasks:
     - name: ui5-tooling-transpile-task
       afterTask: replaceVersion
@@ -28,3 +29,5 @@ builder:
     excludes:
       - /test/**
       - /localService/**
+      - "/**/*.ts"
+      - "/**/*.map"
